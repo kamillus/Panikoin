@@ -27,8 +27,8 @@ contract Panikoin is Initializable, ERC20Upgradeable, OwnableUpgradeable {
 contract PanikoinV2 is Panikoin {
     string private releaseDate;
 
-    function initialize() public virtual initializer {
-        releaseDate = "right now";
+    function setReleaseDate(string memory date) public onlyOwner {
+        releaseDate = date;
     }
     function getReleaseDate() public view returns(string memory) {
         return releaseDate;
