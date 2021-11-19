@@ -1,11 +1,15 @@
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+// import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
-contract Panikoin is ERC20, Ownable {
-    constructor(uint256 initialSupply) ERC20("Panikoin", "PNIK") {
-        _mint(msg.sender, initialSupply);
+contract Panikoin is Initializable, ERC20Upgradeable, OwnableUpgradeable {
+    function initialize(string memory name, string memory symbol, uint256 initialSupply) public virtual initializer {
+        __ERC20_init(name, symbol);
+        __Ownable_init();
+        _mint(_msgSender(), initialSupply);
     }
 
     function mintMoar(uint256 amount) public onlyOwner {
