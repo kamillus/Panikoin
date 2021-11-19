@@ -1,6 +1,5 @@
 pragma solidity ^0.8.0;
 
-// import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
@@ -23,4 +22,16 @@ contract Panikoin is Initializable, ERC20Upgradeable, OwnableUpgradeable {
     function decimals() public view virtual override returns (uint8) {
         return 5;
     }
+}
+
+contract PanikoinV2 is Panikoin {
+    string private releaseDate;
+
+    function initialize() public virtual initializer {
+        releaseDate = "right now";
+    }
+    function getReleaseDate() public view returns(string memory) {
+        return releaseDate;
+    }
+
 }
